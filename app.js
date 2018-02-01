@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -9,7 +8,7 @@ var path = require('path');
 var handlebars = require('express3-handlebars')
 
 var index = require('./routes/index');
-var hello = require('./routes/hello');
+var project = require('./routes/project');
 // Example route
 // var user = require('./routes/user');
 
@@ -25,7 +24,7 @@ app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
-app.use(express.cookieParser('IxD secret key'));
+app.use(express.cookieParser('Intro HCI secret key'));
 app.use(express.session());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
@@ -37,10 +36,9 @@ if ('development' == app.get('env')) {
 
 // Add routes here
 app.get('/', index.view);
-app.get('/hello/:userName', hello.view);
 // Example route
 // app.get('/users', user.list);
-
+app.get('/project/:name', project.viewProject);
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
